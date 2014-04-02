@@ -97,7 +97,7 @@ int main()
 {
 	//# of nodes(equations)
 	//each node has 3-direction displacement
-	unsigned int Nodes = 3000;						  //threashold 3500-old/4500-new
+	unsigned int Nodes = 3500;						  //threashold 3500-old/4500-new
 	unsigned int ARRAY_SIZE = 3*Nodes;				  //Vector Scale;
 	unsigned int ARRAY_SIZE2 = ARRAY_SIZE*ARRAY_SIZE; //Matrix Scale;
 
@@ -143,6 +143,12 @@ int main()
 
 	printf("The nodes number is: %d\n",Nodes);
 	printf("The total equations number is : %d\n",ARRAY_SIZE);
+	printf("Total bytes will be transfered\n");
+
+
+	printf("\tMatrix A: %d MB\n",ARRAY_SIZE2*4/1000000);
+	printf("\tVector b: %d KB\n",ARRAY_SIZE*4/1000);
+
 	printf("Pre-processing in CPU...\n");
 /******Malloc on CPU*******/
 	//start the clock
