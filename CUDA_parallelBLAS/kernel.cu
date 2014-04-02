@@ -31,50 +31,10 @@ __global__ void CUParaSgemv(const float *a, float *b, float *c,unsigned int size
 	c[id] += temp;
 }
 
-
-//__global__ void transpose(float *odata, float *idata, int width, int height)
-//{
-//	__shared__ float block[BLOCK_DIM][BLOCK_DIM+1];
-//	
-//	unsigned int xIndex = blockIdx.x * BLOCK_DIM + threadIdx.x;
-//	unsigned int yIndex = blockIdx.y * BLOCK_DIM + threadIdx.y;
-//	if((xIndex < width) && (yIndex < height))
-//	{
-//		unsigned int index_in = yIndex * width + xIndex;
-//		block[threadIdx.y][threadIdx.x] = idata[index_in];
-//	}
-//
-//	__syncthreads();
-//
-//	xIndex = blockIdx.y * BLOCK_DIM + threadIdx.x;
-//	yIndex = blockIdx.x * BLOCK_DIM + threadIdx.y;
-//	if((xIndex < height) && (yIndex < width))
-//	{
-//		unsigned int index_out = yIndex * height + xIndex;
-//		odata[index_out] = block[threadIdx.x][threadIdx.y];
-//	}
-//
-//	float temp = 0.0;
-//	unsigned int idx = blockIdx.x * BLOCK_DIM + threadIdx.x;
-//
-//	if(idx<height){
-//		for(int i=0;i<width;i++)
-//		{
-//			temp = idata[idx*width+i];
-//			odata[i*]
-//		}
-//	}
-//
-//}
-//void easyTranspose(float o_a[],float i_a[],int size)
-//{
-//	int col = size*size;
-//	for(int i = 0;i<col;i++)
-//	{
-//		for(int j=0;j<col;j++)
-//			o_a[j*col+i]=i_a[i*col+j];
-//	}
-//}
+void test_function()
+{
+	printf("to see if this can be merged");
+}
 
 
 void simple_sgemv(float *A, float *B, float *C,unsigned int size) //valid
@@ -140,6 +100,8 @@ int main()
 
 	//cuda status record
 	cudaError_t cudaStatus;
+
+	test_function();
 
 	printf("The nodes number is: %d\n",Nodes);
 	printf("The total equations number is : %d\n",ARRAY_SIZE);
