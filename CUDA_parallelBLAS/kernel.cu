@@ -22,10 +22,10 @@ __global__ void CUParaSgemv(const float *a, float *b, float *c,unsigned int size
 	{
 		if(id < size)
 			//Column access - coalesced access
-			//temp += a[k*size+id] * b[k];
+			temp += a[k*size+id] * b[k];
 
 			//Row access 
-			temp += a[id*size+k] * b[k];
+			//temp += a[id*size+k] * b[k];
 	}
 
 	c[id] += temp;
@@ -96,7 +96,7 @@ int main()
 {
 	//# of nodes(equations)
 	//each node has 3-direction displacement
-	unsigned int Nodes = 3000;						  //threashold 3500-old/4500-new
+	unsigned int Nodes = 100;						  //threashold 3500-old/4500-new
 	unsigned int ARRAY_SIZE = 3*Nodes;				  //Vector Scale;
 	unsigned int ARRAY_SIZE2 = ARRAY_SIZE*ARRAY_SIZE; //Matrix Scale;
 
@@ -293,10 +293,10 @@ int main()
 	//transfer the array from Host to device(CPU->GPU) and check the cudaStatus
 	
 	//Column access
-	//cudaStatus = cudaMemcpy(d_a, h_atr, sizeof(float)*ARRAY_SIZE2, cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(d_a, h_atr, sizeof(float)*ARRAY_SIZE2, cudaMemcpyHostToDevice);
 	
 	//Row access
-	cudaStatus = cudaMemcpy(d_a, h_a, sizeof(float)*ARRAY_SIZE2, cudaMemcpyHostToDevice);
+	//cudaStatus = cudaMemcpy(d_a, h_a, sizeof(float)*ARRAY_SIZE2, cudaMemcpyHostToDevice);
 	if(cudaStatus != cudaSuccess)
 	{
 		printf("\nCuda Error(cudaMemcpy matrix):%s\n",cudaGetErrorString(cudaStatus));
